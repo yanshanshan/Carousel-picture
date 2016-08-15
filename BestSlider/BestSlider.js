@@ -3,11 +3,11 @@
  */
 
 
-
-;(function(){
+var n = 0
+$(function(){
     var $button = $('.ctrl-item')
     var $item = $('.item')
-    var n = 0
+
     $button.click(function(){
         var $index = $button.index(this)
         $button.eq($index).addClass('ctrl-item1').siblings().removeClass('ctrl-item1')
@@ -21,14 +21,29 @@
             $(this).addClass('item-active')
         })
     })
-    var t = setInterval(function(){
-        if(n >= 3){
-            n=0
-        }else{
-            n+=1
-        }
-        $('.ctrl-item').eq(n).trigger('click',2000)
-    },2000)
+    var t = setInterval('cl()',1500)
 
 
-})();
+    $button.hover(function(){
+        clearInterval(t)
+    },function(){
+        t = setInterval('cl()',1500)
+    })
+
+
+
+})
+function cl(){
+    if(n >= 3){
+        n=0
+    }else{
+        n+=1
+    }
+    $('.ctrl-item').eq(n).trigger('click',2000)
+}
+
+$('.ctrl-item').click(function(){
+     n = $('.ctrl-item').index(this)
+})
+
+
